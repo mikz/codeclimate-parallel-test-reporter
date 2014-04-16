@@ -7,7 +7,11 @@ module CodeClimate
     end
   end
 
-  TestReporter::Configuration.include(Parallel::Configuration)
+  module TestReporter
+    class Configuration
+      include Parallel::Configuration
+    end
+  end
 end
 
 

@@ -7,5 +7,9 @@ CodeClimate::TestReporter.configure do |config|
 end
 
 module CodeClimate
-  TestReporter::Formatter.prepend(Parallel::Formatter)
+  module TestReporter
+    class Formatter
+      prepend Parallel::Formatter
+    end
+  end
 end
