@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'code_climate/parallel/test_reporter'
+
+if ARGV.empty?
+  warn 'pass command to run your tests as an argument to codeclimate-parallel-test-reporter'
+  exit 1
+end
+
+ENV['TO_FILE'] = '1'
+
+ret = system *ARGV
+
+unless system('cc-tddium-post-worker')
+  warn "reporting to codeclimate failed"
+end
+
+FileUtils.rm Dir.glob("#{Dir.tmpdir}/codeclimate-test-coverage-*")
+
+exit ret
+
+
