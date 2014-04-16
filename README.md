@@ -1,24 +1,32 @@
-# Codeclimate::Parallel::Test::Reporter
+# CodeClimate Parallel Test Reporter
 
-TODO: Write a gem description
+If you run tests on one machine in parallel or in several frameworks sequencialy, this might be gem for you.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'codeclimate-parallel-test-reporter'
+    gem 'codeclimate-parallel-test-reporter', group: :test
+    
+And this to the top of your `(spec|test)_helper.rb`:
 
-And then execute:
+    require 'codeclimate-parallel-test-reporter'
 
-    $ bundle
+Also you should **remove the original code climate integration**:
 
-Or install it yourself as:
+    require "codeclimate-test-reporter"
+    CodeClimate::TestReporter.start
 
-    $ gem install codeclimate-parallel-test-reporter
+
+Because parallel test reporter is loading and starting everything automatically.
 
 ## Usage
 
-TODO: Write usage instructions here
+Run your test suite `rake ci` or how else you do:
+
+    $ bundle exec codeclimate-parallel-test-reporter rake ci
+
+It expects `CODECLIMATE_REPO_TOKEN` in your ENV.
 
 ## Contributing
 
